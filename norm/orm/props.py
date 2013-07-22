@@ -5,7 +5,7 @@ from norm.orm.base import Property
 
 from datetime import date, datetime
 
-
+from decimal import Decimal
 
 class Int(Property):
     
@@ -67,4 +67,13 @@ class Unicode(Property):
     def _validate(self, prop, obj, value):
         if type(value) not in (type(None), unicode):
             raise TypeError('%r must be a unicode, not %r' % (prop, value))
+        return value
+
+
+class Numeric(Property):
+
+
+    def _validate(self, prop, obj, value):
+        if type(value) not in (type(None), Decimal):
+            raise TypeError('%r must be a Decimal, not %r' % (prop, value))
         return value
